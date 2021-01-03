@@ -50,8 +50,6 @@ async function run() {
     // https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret
     const token = core.getInput('token');
 
-    console.log(JSON.stringify(github.context, null, 2));
-
     if (github.context.eventName !== 'issue_comment') {
         console.log("not an issue comment. nothing to do.")
     }
@@ -62,11 +60,9 @@ async function run() {
 
     let validLabels = core.getInput('labels').split(',');
     validLabels = validLabels.map(label => label.trim());
-    console.log(validLabels);
 
     let colors = core.getInput('colors').split(',');
     colors = colors.map(color => color.trim());
-    console.log(colors);
 
     const octokit = github.getOctokit(token);
     client.init(octokit);
